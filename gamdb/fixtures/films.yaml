@@ -1,0 +1,12 @@
+- model: films.movie
+  pk: 1
+  fields:
+    name: JoJo Rabbit
+    year: 2018
+    description: WW2 comedy
+- model: films.movie
+  pk: 2
+  fields:
+    name: Smile
+    year: 2022
+    description: Psychological horror
