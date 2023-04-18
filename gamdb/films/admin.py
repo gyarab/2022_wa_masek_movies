@@ -5,7 +5,7 @@ from .models import Director
 from .models import Genre
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'year']
+    list_display = ['id', 'name', 'slug', 'year', 'director']
     list_display_links = ['name']
     
 admin.site.register(Movie, MovieAdmin)

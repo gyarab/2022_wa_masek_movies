@@ -17,9 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from films.views import homepage
 from films.views import directors
+from films.views import movies
+from films.views import movie
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage),
     path('reziseri', directors),
+    path('filmy', movies),
+    path('film/<int:id>', movie),
+    path('herci', actors),
+    path('herec/<int:id>', actor),
 ]
