@@ -3,14 +3,21 @@ from django.db import models
 class Movie(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField()
-    avg_rating = models.FloatField()
+    image_url = models.CharField(max_length=255, blank=True, null=True)
     year = models.IntegerField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    director = models.ForeignKey("Director", blank=True, null=True, on_delete=models.SET_NULL)
-    genre = models.ForeignKey("Genre", blank=True, null=True, on_delete=models.SET_NULL)
+    avg_rating = models.FloatField(blank=True, null=True)
+    description = models.TextField(blank=True)
+    director = models.ForeignKey('Director', blank=True, null=True, on_delete=models.SET_NULL)
+    genres = models.ManyToManyField('Genre', blank=True, null=True)
+    actor = models.ForeignKey("Actor", blank=True, null=True, on_delete=models.SET_NULL)
+    
+    
 
     def __str__(self):
         return f"{self.name} ({self.year})"
+
+    def genres_display(self):
+        return ", ".join([i.name for i in self.genres.all()])
 
 class Director(models.Model):
     name = models.CharField(max_length=255)
@@ -31,4 +38,13 @@ class Comment(models.Model):
     text = models.TextField(blank=True, null=True)
     rating = models.IntegerField()
     
+class Actor(models.Model):
+    name = models.CharField(max_length=255)
+    birth_year = models.IntegerField(blank=True, null=True)
+    slug = models.SlugField()
+    photo_url = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.birth_year})"
 
